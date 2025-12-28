@@ -20,8 +20,12 @@ from schemas import ComplaintCreate, ComplaintResponse, ComplaintStatusResponse,
 from utils import generate_ref_id
 from auth import verify_token, create_access_token, ADMIN_USERNAME, ADMIN_PASSWORD
 
-# Create database tables
-Base.metadata.create_all(bind=engine)
+# Create database tables (with error handling)
+try:
+    Base.metadata.create_all(bind=engine)
+except Exception as e:
+    print(f"Warning: Could not create tables: {e}")
+    print("Tables may already exist or database connection failed.")
 
 # Create uploads directory
 UPLOAD_DIR = Path("uploads")
