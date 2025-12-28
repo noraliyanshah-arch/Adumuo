@@ -619,11 +619,8 @@
             if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
                 return 'http://localhost:8000';
             }
-            // Production: Update this with your backend URL
-            // Example: return 'https://adumuo-api.railway.app';
-            // Example: return 'https://adumuo-api.render.com';
-            // For now, return localhost (update when backend is deployed)
-            return 'http://localhost:8000';
+            // Production backend URL
+            return 'https://adumuo-backend.onrender.com';
         })();
         
         console.log('API Base URL:', API_BASE_URL);
