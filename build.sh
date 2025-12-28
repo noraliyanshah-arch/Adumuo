@@ -4,6 +4,6 @@
 # Upgrade pip and install build tools
 pip install --upgrade pip setuptools wheel
 
-# Install dependencies preferring binary wheels
-pip install --prefer-binary -r ../requirements.txt
+# Force use of binary wheels only (no source builds)
+pip install --only-binary :all: -r ../requirements.txt || pip install --prefer-binary -r ../requirements.txt
 
