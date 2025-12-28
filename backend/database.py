@@ -11,6 +11,14 @@ load_dotenv()
 
 SQLALCHEMY_DATABASE_URL = os.getenv("DATABASE_URL")
 
+# Fix: Remove "DATABASE_URL=" prefix if present (Render sometimes includes it)
+if SQLALCHEMY_DATABASE_URL and SQLALCHEMY_DATABASE_URL.startswith("DATABASE_URL="):
+    SQLALCHEMY_DATABASE_URL = SQLALCHEMY_DATABASE_URL.replace("DATABASE_URL=", "", 1)
+
+# Validate DATABASE_URL exists
+if not SQLALCHEMY_DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set")
+
 # For Supabase/PostgreSQL, ensure SSL is enabled
 # If DATABASE_URL doesn't have ?sslmode=require, add it
 if SQLALCHEMY_DATABASE_URL and "supabase" in SQLALCHEMY_DATABASE_URL.lower():
